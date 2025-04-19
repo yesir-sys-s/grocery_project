@@ -4,25 +4,39 @@ A simple Django-based grocery list management application.
 
 ## System Requirements
 
-- Operating System: Windows, macOS, or Linux
-- Python 3.8 or higher
-- pip (Python package installer)
+- Operating System: Windows 10+, macOS 10.15+, or Linux (Ubuntu 20.04+, Debian 10+)
+- Python 3.8.1 to 3.11.x (3.8.1 recommended for maximum compatibility)
+- pip 20.0.2 or higher
 - Git
 - Web browser (Chrome, Firefox, Safari, or Edge)
-- At least 100MB of free disk space
-- Internet connection (for CDN resources and package installation)
+- 512MB RAM
+- 1GB free disk space
+- Internet connection for initial setup
 
-## Prerequisites
+## Prerequisites Installation
 
-1. Install Python:
-   - Windows: Download from [python.org](https://www.python.org/downloads/)
-   - macOS: `brew install python` (using Homebrew)
-   - Linux: `sudo apt install python3 python3-pip` (Ubuntu/Debian)
+### Windows
+1. Download Python 3.8.1 from [python.org](https://www.python.org/downloads/release/python-381/)
+2. During installation:
+   - Check "Add Python to PATH"
+   - Check "Install pip"
+   - Check "Install for all users"
 
-2. Verify installation:
+### macOS
 ```bash
-python --version  # Should show 3.8 or higher
-pip --version
+# Using Homebrew
+brew install python@3.8
+brew link python@3.8
+
+# Verify installation
+python3.8 --version
+python3.8 -m pip --version
+```
+
+### Linux (Ubuntu/Debian)
+```bash
+sudo apt update
+sudo apt install -y python3.8 python3.8-venv python3-pip
 ```
 
 ## Installation
@@ -34,38 +48,37 @@ cd grocery_project
 ```
 
 2. Create a virtual environment:
-```bash
-python -m venv venv
-```
 
-3. Activate the virtual environment:
-
-On Windows:
+Windows:
 ```bash
+python -m venv venv --prompt grocery
 venv\Scripts\activate
+python -m pip install --upgrade pip setuptools wheel
 ```
 
-On macOS/Linux:
+macOS/Linux:
 ```bash
+python3.8 -m venv venv --prompt grocery
 source venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
 ```
 
-4. Install dependencies:
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-5. Run database migrations:
+4. Run database migrations:
 ```bash
 python manage.py migrate
 ```
 
-6. Create a superuser (optional):
+5. Create a superuser (optional):
 ```bash
 python manage.py createsuperuser
 ```
 
-7. Start the development server:
+6. Start the development server:
 ```bash
 python manage.py runserver
 ```
@@ -125,27 +138,50 @@ python manage.py test
 python manage.py collectstatic
 ```
 
-## Troubleshooting
-
-Common issues and solutions:
+## Troubleshooting Common Issues
 
 1. Static files not loading:
 ```bash
 python manage.py collectstatic --clear
 ```
 
-2. Database errors:
+2. Package installation errors:
 ```bash
-python manage.py makemigrations
+# Clear pip cache
+pip cache purge
+# Install with verbose output
+pip install -r requirements.txt -v
+```
+
+3. Permission errors:
+```bash
+# Windows (run as administrator)
+python -m pip install --user -r requirements.txt
+
+# Linux/macOS
+sudo chown -R $USER:$USER venv/
+```
+
+4. Python version conflicts:
+```bash
+# Verify Python version
+python --version
+# Should show Python 3.8.x
+```
+
+5. Database errors:
+```bash
+# Reset database
+rm db.sqlite3
 python manage.py migrate --run-syncdb
 ```
 
-3. Permission issues (Unix-based systems):
+6. Permission issues (Unix-based systems):
 ```bash
 chmod +x manage.py
 ```
 
-4. Port already in use:
+7. Port already in use:
 ```bash
 # Use a different port
 python manage.py runserver 8001
