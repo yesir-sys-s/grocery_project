@@ -1,0 +1,9 @@
+{% extends 'grocery/base.html' %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4 mb-4">Welcome to Grocery List Manager</h1>
+    <p class="lead mb-5">Keep track of your shopping needs with our simple and intuitive grocery list manager.</p>
+    <a href="{% url 'grocery-list' %}" class="btn btn-success btn-lg">Get Started</a>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+# Core dependencies
+Django>=5.2,<6.0
+python-dotenv>=1.0.0
+
+# Development dependencies
+black>=23.0.0
+flake8>=6.0.0
+pytest>=7.0.0
+pytest-django>=4.5.0
+
+# Production dependencies (optional)
+gunicorn>=21.0.0
+whitenoise>=6.0.0
